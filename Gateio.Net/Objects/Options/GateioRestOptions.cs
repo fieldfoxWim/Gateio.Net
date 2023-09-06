@@ -29,6 +29,20 @@ public class GateioRestOptions : RestExchangeOptions<GateioEnvironment>
         }
     };
     
+    /// <summary>
+    /// Spot API options
+    /// </summary>
+    public GateioRestApiOptions FutureOptions { get; private set; } = new GateioRestApiOptions
+    {
+        RateLimiters = new List<IRateLimiter>
+        {
+            new RateLimiter()
+                .AddPartialEndpointLimit("/", 200, TimeSpan.FromSeconds(10))
+            //.AddPartialEndpointLimit("/sapi/", 180000, TimeSpan.FromMinutes(1))
+            //.AddEndpointLimit("/api/v3/order", 50, TimeSpan.FromSeconds(10), HttpMethod.Post, true)
+        }
+    };
+    
     internal GateioRestOptions Copy()
     {
         var options = Copy<GateioRestOptions>();

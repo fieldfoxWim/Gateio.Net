@@ -1,4 +1,9 @@
-﻿using Gateio.Net.Clients;
+﻿using CryptoExchange.Net.Sockets;
+using Gateio.Net.Clients;
+using Gateio.Net.Enums;
+using Gateio.Net.Objects.@internal;
+using Gateio.Net.Objects.Models.Futures;
+using Gateio.Net.Objects.Models.Spot;
 using NUnit.Framework;
 
 namespace Gateio.Net.UnitTests;
@@ -33,5 +38,46 @@ public class IntegrationTest
         var symbols = await client.SpotAndMarginApi.CommonSpotClient.GetSymbolsAsync();
        
         Assert.IsNotNull(symbols);
+    }
+    
+    [Test]
+    public async Task TickerTest()
+    {
+        var client = new GateioSocketClient(options => {  });
+        var symbols = await client.SpotAndMarginApi.ExchangeData.SubscribeToTickerUpdatesAsync("BTC_USDT", OnMessage);
+        
+        await Task.Delay(10000);
+
+        Assert.IsNotNull(symbols);
+    }
+
+    private void OnMessage(DataEvent<GateioSocketResponse<GateioTick>> obj)
+    {
+        Assert.IsNotNull(obj.Data);
+    }
+    
+    [Test]
+    public async Task FutureSymbolsTest()
+    {
+        var client = new GateioRestClient(options => {  });
+        var symbols = await client.PerpetualFuturesApi.ExchangeData.GetFuturesContractsAsync(FuturesContractSettle.Usdt);
+       
+        Assert.IsNotNull(symbols);
+    }
+    
+    [Test]
+    public async Task FuturesTickerTest()
+    {
+        var client = new GateioSocketClient(options => {  });
+        var symbols = await client.PerpetualFuturesApi.ExchangeData.SubscribeToTickerUpdatesAsync(FuturesContractSettle.Usdt,"BTC_USDT", OnFuturesMessage);
+        
+        await Task.Delay(30000);
+
+        Assert.IsNotNull(symbols);
+    }
+
+    private void OnFuturesMessage(DataEvent<GateioSocketResponse<List<GateioFutureTick>>> obj)
+    {
+        Assert.IsNotNull(obj.Data);
     }
 }

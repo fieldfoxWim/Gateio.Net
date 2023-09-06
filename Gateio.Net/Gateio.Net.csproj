@@ -17,7 +17,6 @@
       <Folder Include="Clients\AccouncementsApi\" />
       <Folder Include="Clients\DeliveryFuturesApi\" />
       <Folder Include="Clients\OptionsApi\" />
-      <Folder Include="Clients\PerpetualFuturesApi\" />
       <Folder Include="Converters\" />
       <Folder Include="Icon\" />
     </ItemGroup>

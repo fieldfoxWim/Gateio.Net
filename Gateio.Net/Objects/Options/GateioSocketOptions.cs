@@ -27,10 +27,23 @@ public class GateioSocketOptions : SocketExchangeOptions<GateioEnvironment>
         }
     };
     
+    /// <summary>
+    /// Options for the Spot API
+    /// </summary>
+    public GateioSocketApiOptions FutureOptions { get; private set; } = new GateioSocketApiOptions()
+    {
+        RateLimiters = new List<IRateLimiter>
+        {
+            new RateLimiter()
+                .AddConnectionRateLimit("api.gateio.ws/ws", 5, TimeSpan.FromSeconds(1))
+        }
+    };
+    
     internal GateioSocketOptions Copy()
     {
         var options = Copy<GateioSocketOptions>();
         options.SpotOptions = SpotOptions.Copy();
+        options.FutureOptions = FutureOptions.Copy();
         return options;
     }
 }

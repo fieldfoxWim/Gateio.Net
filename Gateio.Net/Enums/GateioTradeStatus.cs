@@ -10,20 +10,20 @@ public enum GateioTradeStatus
     /// Cannot be bought or sold
     /// </summary>
     [Map("untradable")]
-    Untradable,
+    Untradable = 1,
     /// <summary>
     /// Can be bought
     /// </summary>
     [Map("buyable")]
-    Buyable,
+    Buyable = 2,
     /// <summary>
     /// Can be sold
     /// </summary>
     [Map("sellable")]
-    Sellable,
+    Sellable = 3,
     /// <summary>
     /// Can be bought or sold
     /// </summary>
     [Map("tradable")]
-    Tradable
+    Tradable = 4
 }

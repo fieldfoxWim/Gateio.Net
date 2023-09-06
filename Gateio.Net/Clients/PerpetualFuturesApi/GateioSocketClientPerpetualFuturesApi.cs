@@ -1,18 +1,18 @@
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Options;
 using CryptoExchange.Net.Sockets;
-using Gateio.Net.Interfaces.Clients.SpotAndMarginApi;
+using Gateio.Net.Interfaces.Clients.PerpetualFutures;
 using Gateio.Net.Objects.@internal;
 using Gateio.Net.Objects.Models.Spot;
 using Gateio.Net.Objects.Options;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 
-namespace Gateio.Net.Clients.SpotAndMarginApi;
+namespace Gateio.Net.Clients.PerpetualFuturesApi;
 
-/// <inheritdoc />
-public class GateioSocketSpotAndMarginApi : SocketApiClient, IGateioSocketClientSpotAndMarginApi
+public class GateioSocketClientPerpetualFuturesApi : SocketApiClient, IGateioSocketClientPerpetualFuturesApi
 {
     #region fields
     /// <inheritdoc />
@@ -23,20 +23,18 @@ public class GateioSocketSpotAndMarginApi : SocketApiClient, IGateioSocketClient
     internal DateTime? _lastExchangeInfoUpdate;
     #endregion
     
-    /// <inheritdoc />
-    public IGateioSocketSpotApiExchangeData ExchangeData { get; }
+    public IGateioSocketClientPerpetualFuturesApiExchangeData ExchangeData { get; }
     
     #region constructor/destructor
 
-    internal GateioSocketSpotAndMarginApi(ILogger logger, GateioSocketOptions options) :
-        base(logger, options.Environment.SpotAndMarginSocketAddress, options, options.SpotOptions)
+    internal GateioSocketClientPerpetualFuturesApi(ILogger logger, GateioSocketOptions options) :
+        base(logger, options.Environment.PerpetualFuturesSocketAddress, options, options.FutureOptions)
     {
         SetDataInterpreter((data) => string.Empty, null);
         
-        ExchangeData = new GateioSocketSpotApiExchangeData(logger, this);
+        ExchangeData = new GateioSocketClientPerpetualFuturesApiExchangeData(logger, this);
     }
     #endregion
-    
     protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
     {
         throw new NotImplementedException();
@@ -55,8 +53,9 @@ public class GateioSocketSpotAndMarginApi : SocketApiClient, IGateioSocketClient
             Event = "subscribe",
             Payload = payload.ToArray(),
         };
-
+        
         return SubscribeAsync(url, request, null, false, onData, ct);
+        
     }
 
     protected override bool HandleQueryResponse<T>(SocketConnection socketConnection, object request, JToken data, out CallResult<T>? callResult)
@@ -97,12 +96,17 @@ public class GateioSocketSpotAndMarginApi : SocketApiClient, IGateioSocketClient
 
     protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, object request)
     {
-        return true;
+        if (message.Type != JTokenType.Object)
+            return false;
+
+        var bRequest = (GateioSocketRequest)request;
+        var channel = message["channel"];
+        return channel != null && bRequest.Channel.Equals(channel.Value<string>());
     }
 
     protected override bool MessageMatchesHandler(SocketConnection socketConnection, JToken message, string identifier)
     {
-        return true;
+        throw new NotImplementedException();
     }
 
     protected override Task<CallResult<bool>> AuthenticateSocketAsync(SocketConnection socketConnection)

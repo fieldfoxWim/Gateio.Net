@@ -67,7 +67,7 @@ public static class GateioHelpers
         if (string.IsNullOrEmpty(symbolString))
             throw new ArgumentException("Symbol is not provided");
 
-        if(!Regex.IsMatch(symbolString, "^[a-zA-Z0-9]{3,5}_[a-zA-Z0-9]{3,5}$"))
+        if(!Regex.IsMatch(symbolString, "^[a-zA-Z0-9]{2,}_[a-zA-Z0-9]{3,5}$"))
             throw new ArgumentException($"{symbolString} is not a valid Gate.io symbol. Should be [BaseAsset]_[QuoteAsset], e.g. BTC_USDT");
     }
 }

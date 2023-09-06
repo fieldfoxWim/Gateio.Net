@@ -79,7 +79,6 @@ public class GateioRestClientSpotApiExchangeData : IGateioRestClientSpotApiExcha
 
     #region asset details
 
-    /// <inheritdoc />
     public async Task<WebCallResult<List<GateioAssetDetails>>> GetAssetDetailsAsync(CancellationToken ct = default)
     {
         return await _baseClient
@@ -91,7 +90,6 @@ public class GateioRestClientSpotApiExchangeData : IGateioRestClientSpotApiExcha
 
     #region asset detail
 
-    /// <inheritdoc />
     public async Task<WebCallResult<GateioAssetDetails>> GetAssetDetailAsync(string currency,
         CancellationToken ct = default)
     {

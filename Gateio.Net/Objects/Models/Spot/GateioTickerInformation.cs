@@ -8,73 +8,73 @@ public class GateioTickerInformation
     /// Gets or sets the currency pair.
     /// </summary>
     [JsonProperty("currency_pair")]
-    public string CurrencyPair { get; set; }
+    public string CurrencyPair { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the last trading price.
     /// </summary>
     [JsonProperty("last")]
-    public string Last { get; set; }
+    public string Last { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the recent lowest ask.
     /// </summary>
     [JsonProperty("lowest_ask")]
-    public string LowestAsk { get; set; }
+    public string LowestAsk { get; set; } = string.Empty;
     
     /// <summary>
     /// Gets or sets the recent highest bid.
     /// </summary>
     [JsonProperty("highest_bid")]
-    public string HighestBid { get; set; }
+    public string HighestBid { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the change percentage in the last 24 hours.
     /// </summary>
     [JsonProperty("change_percentage")]
-    public string ChangePercentage { get; set; }
+    public string ChangePercentage { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the utc0 timezone, the percentage change in the last 24 hours.
     /// </summary>
     [JsonProperty("change_utc0")]
-    public string ChangeUtc0 { get; set; }
+    public string ChangeUtc0 { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the utc8 timezone, the percentage change in the last 24 hours.
     /// </summary>
     [JsonProperty("change_utc8")]
-    public string ChangeUtc8 { get; set; }
+    public string ChangeUtc8 { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the base currency trade volume in the last 24 hours.
     /// </summary>
     [JsonProperty("base_volume")]
-    public string BaseVolume { get; set; }
+    public string BaseVolume { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the quote currency trade volume in the last 24 hours.
     /// </summary>
     [JsonProperty("quote_volume")]
-    public string QuoteVolume { get; set; }
+    public string QuoteVolume { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the highest price in 24 hours.
     /// </summary>
     [JsonProperty("high_24h")]
-    public string High24h { get; set; }
+    public string High24h { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the lowest price in 24 hours.
     /// </summary>
     [JsonProperty("low_24h")]
-    public string Low24h { get; set; }
+    public string Low24h { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the ETF net value.
     /// </summary>
     [JsonProperty("etf_net_value")]
-    public string EtfNetValue { get; set; }
+    public string EtfNetValue { get; set; } = string.Empty;
 
     /// <summary>
     /// Gets or sets the ETF previous net value at re-balancing time.

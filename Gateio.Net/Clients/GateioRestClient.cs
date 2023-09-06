@@ -1,7 +1,9 @@
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using Gateio.Net.Clients.PerpetualFuturesApi;
 using Gateio.Net.Clients.SpotAndMarginApi;
 using Gateio.Net.Interfaces.Clients;
+using Gateio.Net.Interfaces.Clients.PerpetualFutures;
 using Gateio.Net.Interfaces.Clients.SpotAndMarginApi;
 using Gateio.Net.Objects.Options;
 using Microsoft.Extensions.Logging;
@@ -15,6 +17,8 @@ public class GateioRestClient : BaseRestClient, IGateioRestClient
 
     /// <inheritdoc />
     public IGateioRestClientSpotAndMarginApi SpotAndMarginApi { get; }
+    /// <inheritdoc />
+    public IGateioRestClientPerpetualFuturesApi PerpetualFuturesApi { get; }
     #endregion
     
     #region constructor/destructor
@@ -48,7 +52,8 @@ public class GateioRestClient : BaseRestClient, IGateioRestClient
         Initialize(options);
 
         SpotAndMarginApi = AddApiClient(new GateioRestClientSpotAndMarginApi(_logger, httpClient, options));
-       }
+        PerpetualFuturesApi = AddApiClient(new GateioRestClientPerpetualFuturesApi(_logger, httpClient, options));
+    }
 
     #endregion
     
@@ -67,6 +72,5 @@ public class GateioRestClient : BaseRestClient, IGateioRestClient
     public void SetApiCredentials(ApiCredentials credentials)
     {
         SpotAndMarginApi.SetApiCredentials(credentials);
-        
     }
 }

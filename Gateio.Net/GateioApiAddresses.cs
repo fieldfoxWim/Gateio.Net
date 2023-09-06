@@ -7,17 +7,22 @@ public class GateioApiAddresses
     /// </summary>
     public string RestClientAddress { get; set; } = string.Empty;
     /// <summary>
-    /// The address used by the GateioSocketClient for the Spot streams
+    /// The address used by the GateioSocketClient for the Spot
     /// </summary>
-    public string SocketClientAddress { get; set; } = string.Empty;
-    
+    public string SocketClientSpotAddress { get; set; } = string.Empty;
+    /// <summary>
+    /// The address used by the GateioSocketClient for the futures
+    /// </summary>
+    public string SocketClientFuturesAddress { get; set; } = string.Empty;
+
     /// <summary>
     /// The default addresses to connect to the binance.com API
     /// </summary>
     public static GateioApiAddresses Default = new GateioApiAddresses
     {
         RestClientAddress = "https://api.gateio.ws/api/",
-        SocketClientAddress = "wss://api.gateio.ws/ws/",
+        SocketClientSpotAddress = "wss://api.gateio.ws/ws/",
+        SocketClientFuturesAddress = "wss://fx-ws.gateio.ws/",
     };
     
     /// <summary>
@@ -26,7 +31,8 @@ public class GateioApiAddresses
     public static GateioApiAddresses TestNet = new GateioApiAddresses
     {
         RestClientAddress = "https://fx-api-testnet.gateio.ws/api",
-        SocketClientAddress = string.Empty,
+        SocketClientSpotAddress = string.Empty,
+        SocketClientFuturesAddress = "wss://fx-ws-testnet.gateio.ws/",
     };
     
 }
