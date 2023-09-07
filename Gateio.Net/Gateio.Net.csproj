@@ -3,7 +3,6 @@
     <PropertyGroup>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>11</LangVersion>
         <Authors>Wim Devos</Authors>
         <Description>Gateio.Net is a .Net wrapper for the Gate.io API</Description>
@@ -11,6 +10,9 @@
         <AssemblyVersion>1.0.0</AssemblyVersion>
         <FileVersion>1.0.0</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
+	<RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
+	<TargetFramework>netstandard2.0</TargetFramework>
+	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>
