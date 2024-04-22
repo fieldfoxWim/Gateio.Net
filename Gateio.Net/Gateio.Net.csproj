@@ -7,12 +7,13 @@
         <Authors>Wim Devos</Authors>
         <Description>Gateio.Net is a .Net wrapper for the Gate.io API</Description>
         <Company>Wim Devos</Company>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
-        <FileVersion>1.0.0</FileVersion>
+        <AssemblyVersion>1.0.1</AssemblyVersion>
+        <FileVersion>1.0.1</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
 	<RuntimeIdentifiers>win-x64;osx-x64;linux-x64</RuntimeIdentifiers>
 	<TargetFramework>netstandard2.0</TargetFramework>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	<Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
